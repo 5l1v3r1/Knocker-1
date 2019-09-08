@@ -1,12 +1,13 @@
-# Knocker
-A port knocking code, written in python3
-# Information
-        ***Knocker v1.0***
-		Created by: CR4CKB0X (Praman Kasliwal)
+# Knocker v1.0
 
-  Knocker : A python based tool to perform port knocking.
-  Port Knocking: A method through which a person tries to identify all the open ports of a system from 1 to 65535
-# Usage
+## Credits
+ Created by: CR4CKB0X (Praman Kasliwal)
+ 
+## Basic Information
+Knocker : A python based tool to perform port knocking.
+Port Knocking: A method through which a person tries to identify all the open ports of a system from 1 to 65535
+
+## Usage
   `$ knocker [-o output_file] -t ip_address`
 			
   Example:<br>
