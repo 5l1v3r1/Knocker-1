@@ -5,11 +5,11 @@
 <strong>Port Knocking</strong>: A method through which a person tries to identify all the open ports of a system from 1 to 65535.<br>
 
 ## Usage
-  `$ knocker [-o output_file] -t ip_address`
+  `$ python3 knocker [-o output_file] -t ip_address`
 			
   Example:<br>
-		`$ knocker -t 192.168.23.158`<br>
-		`$ knocker -o open_ports.txt -t 192.168.23.158`
+		`$ python3 knocker -t 192.168.23.158`<br>
+		`$ python3 knocker -o open_ports.txt -t 192.168.23.158`
 
   For help: knocker -h<br>
   -o --> (Optional) Sets an output file to list out the open ports into<br>
