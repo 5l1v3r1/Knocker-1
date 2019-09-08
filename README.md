@@ -1,8 +1,8 @@
 # Knocker v1.0
 
 ## Basic Information
-Knocker: A python based tool to perform <b>port knocking</b>.<br>
-Port Knocking: A method through which a person tries to identify all the open ports of a system from 1 to 65535.<br>
+<strong>Knocker</strong>: A python based tool to perform <b>port knocking</b>.<br>
+<strong>Port Knocking</strong>: A method through which a person tries to identify all the open ports of a system from 1 to 65535.<br>
 
 ## Usage
   `$ knocker [-o output_file] -t ip_address`
