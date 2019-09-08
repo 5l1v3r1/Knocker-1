@@ -9,11 +9,13 @@
 			
   Example:<br>
 		`$ python3 knocker -t 192.168.23.158`<br>
-		`$ python3 knocker -o open_ports.txt -t 192.168.23.158`
+		`$ python3 knocker -o open_ports.txt -t 192.168.23.158`<br>
+		`$ python3 knocker -d example.com`<br>
 
   For help: knocker -h<br>
   -o --> (Optional) Sets an output file to list out the open ports into<br>
-  -t --> (Mandatory) Sets target IP Address<br>
+  -t --> (Mandatory if -d not used) Sets target IP Address<br>
+  -d --> (Mandatory if -t not used) Sets target from domain name instead of IP Address <br>
   -h --> Displays this help message<br>
 
 ## Credits
