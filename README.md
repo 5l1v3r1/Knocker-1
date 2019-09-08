@@ -9,7 +9,7 @@ A port knocking code, written in python3
 # Usage
   `$ knocker [-o output_file] -t ip_address`
 			
-  Example:
+  Example:<br>
 		`$ knocker -t 192.168.23.158`<br>
 		`$ knocker -o open_ports.txt -t 192.168.23.158`
 
