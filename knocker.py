@@ -28,9 +28,13 @@ try:
 	def knock(ip, filename=None):
 		print ("IP Address: "+ip, end="\n")
 		#print ("Open Ports:")
-		sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		try:
+			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		except:
+			sys.exit("[!] Error in Socket Establishment...")
+
 		for port in range(1,65536):
-			if ~(sock.connect_ex((ip, port))):
+			if not(sock.connect_ex((ip, port))):
 				if (filename == None):
 					print(port, end="\n")
 				else:
@@ -40,34 +44,37 @@ try:
 		print ("\nKnocking complete...")
 		if (filename != None):
 			print ("Data saved in file: ", file.name())
-		exit(1)
+		exit()
 
 
 	def main(arg):
 		if len(arg) < 1:
-			print ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
-			exit(1)
+			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
 		#print (''.join(argv))
-		if any("-h" for s in arg):
-			helper()
-			exit(1)
-		elif any("-t" for s in arg):
-			ip = arg[arg.index["-t"]+1]
-			if any("-o" for s in arg):
-				filename = arg[arg.index["-o"]+1]
-				knock(ip , filename)
-			else:
-				knock(ip, None)
-		else:
+		filename = None
+		ip = None
+		for i in range(len(arg)):
+			if (arg[i] == "-t"):
+				flag = 1
+				ip = arg[i+1]
+			elif (arg[i] == "-o"):
+				filename = arg[i+1]
+			elif arg[i] == "-h":
+				helper()
+				exit(1)
+		if flag == 0:
 			print ("Error: Missing target (-t)")
-			print ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\n")
-			exit(1)
-		exit(1)
+			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\n")
+		knock (ip, filename)
+		exit()
 
 except KeyboardInterrupt:
-	print ("[*] Keyboard Interrupt detected...\nExiting the program", end="\n")
-	exit(1)
+	sys.exit ("[*] Keyboard Interrupt detected...\nExiting the program")
+	#exit(1)
 
 
 if __name__ == "__main__":
-	main(sys.argv[1:])
+	try:
+		main(sys.argv[1:])
+	except KeyboardInterrupt:
+		sys.exit ("[*] Keyboard Interrupt detected...\nExiting the program")
