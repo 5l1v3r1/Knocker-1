@@ -12,22 +12,23 @@ try:
   Knocker : A python based tool to perform port knocking.
   Port Knocking: A method through which a person tries to identify all the open ports of a system from 1 to 65535
 
-  Usage: python3 knocker [-o output_file] -t ip_address
+  Usage: knocker [-o output_file] -t ip_address
 			
   Example:
-		python3 knocker -t 192.168.23.158
-		python3 knocker -o open_ports.txt -t 192.168.23.158
+		knocker -t 192.168.23.158
+		knocker -o open_ports.txt -t 192.168.23.158
 
   For help: knocker -h
 
   -o\t(Optional) Sets an output file to list out the open ports into
   -t\t(Mandatory) Sets target IP Address
+  -d\t(Optional) Set target using domain name
   -h\tDisplays this help message\n
 			""")
 
 	def knock(ip, filename=None):
 		print ("IP Address: "+ip, end="\n")
-		print ("Open Ports:", end="\n")
+		#print ("Open Ports:")
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		except:
@@ -49,14 +50,18 @@ try:
 
 	def main(arg):
 		if len(arg) < 1:
-			sys.exit ("Usage: python3 knocker [-o output_file] -t ip_address\nExample:\n python3 knocker -t  192.168.23.158\n python3 knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
+			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
 		#print (''.join(argv))
 		filename = None
 		ip = None
+		flag = 0
 		for i in range(len(arg)):
 			if (arg[i] == "-t"):
-				flag = 1
+				flag += 1
 				ip = arg[i+1]
+			elif (arg[i] == "-d"):
+				flag += 1
+				ip = socket.gethostbyname(arg[i+1])
 			elif (arg[i] == "-o"):
 				filename = arg[i+1]
 			elif arg[i] == "-h":
@@ -64,8 +69,11 @@ try:
 				exit(1)
 		if flag == 0:
 			print ("Error: Missing target (-t)")
-			sys.exit ("Usage: python3 knocker [-o output_file] -t ip_address\nExample: python3 knocker -o open_ports.txt -t 192.168.23.158\n")
+			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\n")
+		elif flag == 2:
+			sys.exit ("Error: Enter either '-t' or '-d', both must not be given. \n")
 		knock (ip, filename)
+
 		exit()
 
 except KeyboardInterrupt:
