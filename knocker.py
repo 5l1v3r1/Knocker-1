@@ -12,11 +12,11 @@ try:
   Knocker : A python based tool to perform port knocking.
   Port Knocking: A method through which a person tries to identify all the open ports of a system from 1 to 65535
 
-  Usage: knocker [-o output_file] -t ip_address
+  Usage: python3 knocker [-o output_file] -t ip_address
 			
   Example:
-		knocker -t 192.168.23.158
-		knocker -o open_ports.txt -t 192.168.23.158
+		python3 knocker -t 192.168.23.158
+		python3 knocker -o open_ports.txt -t 192.168.23.158
 
   For help: knocker -h
 
@@ -27,7 +27,7 @@ try:
 
 	def knock(ip, filename=None):
 		print ("IP Address: "+ip, end="\n")
-		#print ("Open Ports:")
+		print ("Open Ports:", end="\n")
 		try:
 			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		except:
@@ -49,7 +49,7 @@ try:
 
 	def main(arg):
 		if len(arg) < 1:
-			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
+			sys.exit ("Usage: python3 knocker [-o output_file] -t ip_address\nExample:\n python3 knocker -t  192.168.23.158\n python3 knocker -o open_ports.txt -t 192.168.23.158\nFor help: knocker -h\n")
 		#print (''.join(argv))
 		filename = None
 		ip = None
@@ -64,7 +64,7 @@ try:
 				exit(1)
 		if flag == 0:
 			print ("Error: Missing target (-t)")
-			sys.exit ("Usage: knocker [-o output_file] -t ip_address\nExample: knocker -o open_ports.txt -t 192.168.23.158\n")
+			sys.exit ("Usage: python3 knocker [-o output_file] -t ip_address\nExample: python3 knocker -o open_ports.txt -t 192.168.23.158\n")
 		knock (ip, filename)
 		exit()
 
