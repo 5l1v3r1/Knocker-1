@@ -30,18 +30,18 @@ try:
 		print ("IP Address: "+ip, end="\n")
 		#print ("Open Ports:")
 		try:
-			sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			for port in range(1,65536):
+				sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+				if not(sock.connect_ex((ip, port))):
+					if (filename == None):
+						print(port, end="\n")
+					else:
+						file = open(filename, "a+")
+						print (port, file)
+						file.close()
+				sock.close()			
 		except:
 			sys.exit("[!] Error in Socket Establishment...")
-
-		for port in range(1,65536):
-			if not(sock.connect_ex((ip, port))):
-				if (filename == None):
-					print(port, end="\n")
-				else:
-					file = open(filename, "a+")
-					print (port, file)
-					file.close()
 		print ("\nKnocking complete...")
 		if (filename != None):
 			print ("Data saved in file: ", file.name())
